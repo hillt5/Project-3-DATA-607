@@ -13,7 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 # Languages
 
 ```{r import-lang-csv}
-survey_lang_raw <- read.csv("C:/Users/Thomas/Documents/GitHub/DATA607_Project_3/LanguageSkills.csv")
+survey_lang_raw <- read.csv("https://raw.githubusercontent.com/hillt5/Project-3-DATA-607/master/LanguageSkills.csv")
 
 head(survey_lang_raw)
 names(survey_lang_raw)
@@ -159,7 +159,7 @@ So while PowerShell is developers' favorite first pick, it's actually only the f
 # Databases
 
 ```{r import-db-csv}
-survey_db_raw <- read.csv("C:/Users/Thomas/Documents/GitHub/DATA607_Project_3/DatabaseSkills.csv")
+survey_db_raw <- read.csv("https://raw.githubusercontent.com/hillt5/Project-3-DATA-607/master/DatabaseSkills.csv")
 
 head(survey_db_raw)
 names(survey_db_raw)
@@ -305,7 +305,7 @@ The number one preferred database for developers is Microsoft SQL Server, althou
 
 ```{r import-pf-csv}
 
-survey_pf_raw <- read.csv("C:/Users/Thomas/Documents/GitHub/DATA607_Project_3/PlatformSkills.csv")
+survey_pf_raw <- read.csv("https://raw.githubusercontent.com/hillt5/Project-3-DATA-607/master/PlatformSkills.csv")
 head(survey_pf_raw)
 names(survey_pf_raw)
 

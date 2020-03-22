@@ -1,0 +1,181 @@
+DROP DATABASE IF EXISTS data607_datascience;
+CREATE DATABASE data607_datascience;
+USE data607_datascience;
+
+CREATE TABLE LanguageSkills (
+respondent_id INT,
+language1 VARCHAR(30),
+language2 VARCHAR(30),
+language3 VARCHAR(30),
+language4 VARCHAR(30),
+language5 VARCHAR(30),
+language6 VARCHAR(30),
+language7 VARCHAR(30),
+language8 VARCHAR(30),
+language9 VARCHAR(30),
+language10 VARCHAR(30),
+language11 VARCHAR(30),
+language12 VARCHAR(30),
+language13 VARCHAR(30),
+language14 VARCHAR(30),
+language15 VARCHAR(30),
+language16 VARCHAR(30),
+language17 VARCHAR(30),
+language18 VARCHAR(30),
+language19 VARCHAR(30),
+language20 VARCHAR(30),
+language21 VARCHAR(30),
+language22 VARCHAR(30),
+language23 VARCHAR(30),
+language24 VARCHAR(30),
+language25 VARCHAR(40),
+PRIMARY KEY (respondent_id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE DatabaseSkills (
+respondent_id INT,
+database1 VARCHAR(30),
+database2 VARCHAR(30),
+database3 VARCHAR(30),
+database4 VARCHAR(30),
+database5 VARCHAR(30),
+database6 VARCHAR(30),
+database7 VARCHAR(30),
+database8 VARCHAR(30),
+database9 VARCHAR(30),
+database10 VARCHAR(30),
+database11 VARCHAR(30),
+database12 VARCHAR(30),
+database13 VARCHAR(30),
+PRIMARY KEY (respondent_id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE PlatformSkills (
+respondent_id INT,
+platform1 VARCHAR(30),
+platform2 VARCHAR(30),
+platform3 VARCHAR(30),
+platform4 VARCHAR(30),
+platform5 VARCHAR(30),
+platform6 VARCHAR(30),
+platform7 VARCHAR(30),
+platform8 VARCHAR(30),
+platform9 VARCHAR(30),
+platform10 VARCHAR(30),
+platform11 VARCHAR(30),
+platform12 VARCHAR(30),
+platform13 VARCHAR(30),
+platform14 VARCHAR(30),
+platform15 VARCHAR(30),
+platform16 VARCHAR(30),
+PRIMARY KEY (respondent_id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE WebFrameSkills (
+respondent_id INT,
+webframe1 VARCHAR(30),
+webframe2 VARCHAR(30),
+webframe3 VARCHAR(30),
+webframe4 VARCHAR(30),
+webframe5 VARCHAR(30),
+webframe6 VARCHAR(30),
+webframe7 VARCHAR(30),
+webframe8 VARCHAR(30),
+webframe9 VARCHAR(30),
+webframe10 VARCHAR(30),
+webframe11 VARCHAR(30),
+webframe12 VARCHAR(30),
+PRIMARY KEY (respondent_id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE DevEnvironSkills (
+respondent_id INT,
+devenviron1 VARCHAR(30),
+devenviron2 VARCHAR(30),
+devenviron3 VARCHAR(30),
+devenviron4 VARCHAR(30),
+devenviron5 VARCHAR(30),
+devenviron6 VARCHAR(30),
+devenviron7 VARCHAR(30),
+devenviron8 VARCHAR(30),
+devenviron9 VARCHAR(30),
+devenviron10 VARCHAR(30),
+devenviron11 VARCHAR(30),
+devenviron12 VARCHAR(30),
+devenviron13 VARCHAR(30),
+devenviron14 VARCHAR(30),
+devenviron15 VARCHAR(30),
+devenviron16 VARCHAR(30),
+devenviron17 VARCHAR(30),
+devenviron18 VARCHAR(30),
+devenviron19 VARCHAR(30),
+devenviron20 VARCHAR(30),
+devenviron21 VARCHAR(30),
+devenviron22 VARCHAR(30),
+PRIMARY KEY (respondent_id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE OpsysSkills (
+respondent_id INT,
+opsys1 VARCHAR(30),
+opsys2 VARCHAR(30),
+PRIMARY KEY (respondent_id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE Demographics (
+respondent_id INT,
+age INT,
+country VARCHAR(50),
+jobsat VARCHAR(40),
+dummy VARCHAR(20),
+PRIMARY KEY (respondent_id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/Project3/LanguageSkills.csv'
+INTO TABLE LanguageSkills
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
+
+LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/Project3/DatabaseSkills.csv'
+INTO TABLE DatabaseSkills
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
+
+LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/Project3/PlatformSkills.csv'
+INTO TABLE PlatformSkills
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
+
+LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/Project3/WebFrameSkills.csv'
+INTO TABLE WebFrameSkills
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
+
+LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/Project3/DevEnvironSkills.csv'
+INTO TABLE DevEnvironSkills
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
+
+LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/Project3/OpSysSkills.csv'
+INTO TABLE OpSysSkills
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
+
+LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/Project3/Demographics.csv'
+INTO TABLE Demographics
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;

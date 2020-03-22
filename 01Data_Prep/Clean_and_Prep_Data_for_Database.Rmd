@@ -1,0 +1,122 @@
+---
+title: "Data 607 Project 3"
+author: "Ken Popkin"
+date: "3/17/2020"
+output: html_document
+---
+
+### Objective:
+W. Edwards Deming said, “In God we trust, all others must bring data.” Please use data to answer the question, “Which are the most valued data science skills?” Consider your work as an exploration; there is not necessarily a “right answer.”
+
+This notebook loads Stack Overflow's 2019 survey and extracts respondents who identified as a data scientist, data analyst, or machine learning engineer.  This data is then cleaned & transformed prior to being exported as csv files to load into a MySql database.
+
+### Setup
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(message = FALSE)
+knitr::opts_chunk$set(warning = FALSE)
+```
+
+```{r}
+library(sqldf)
+library(dplyr)
+library(tidyr)
+```
+
+```{r, Load-text-file}
+#data <- read.csv('https://raw.githubusercontent.com/krpopkin/DATA607-Class-Repository/master/Week%201/#approval_polllist.csv')
+
+data <- read.csv('C:/Users/user/Documents/00_Applications_DataScience/CUNY/DATA607/DATA607-Project3-DataScience-Skills-Datasets/stack_overflow_survey2019/survey_results_public.csv')
+
+total_respondents <- dim(data)
+cat('There were', total_respondents[1], 'respondents to the survey')
+```
+
+### Data selection
+We only want respondents that are a "Data Scientist or Machine Learning Specialist", "Data or business analyst" or "Engineer, Data".  Note that respondents can pick multiple developer type skills.
+
+```{r}
+ data1 <- sqldf('SELECT * FROM data WHERE (DevType LIKE "%Data Scientist or Machine Learning Specialist%") OR (DevType LIKE "%Data or business analyst%") OR (DevType LIKE "%Engineer, Data%") ')
+
+respondents_count <- dim(data1)
+cat('There are', respondents_count[1], 'respondents in data science or a related field')
+```
+
+There are 85 questions in the survey, but for this project we are only interested in questions pertaining to skills, along with some demographic data that might prove interesting to report. The skills were going to focus on are languages, databases, platforms, web frames, development environments, and operating systems. For demographics we'll include age, gender, ethnicity, country, education level, undergrad major, and job satisfaction. 
+```{r}
+data2 <- sqldf('SELECT Respondent, LanguageWorkedWith, DatabaseWorkedWith, PlatformWorkedWith, WebFrameWorkedWith, DevEnviron, OpSys, Age, Gender, Ethnicity, Country, UndergradMajor, JobSat FROM data1')
+
+dim(data2)
+```
+
+### Transform the data
+The survey allowed respondents to select multiple values for the skills.  For example, Languages worked with offered up to 25 languages that a respondent could respond to.  In the input file, all the languages a given respondent selected are in the same column.
+
+The transformations below engage TidyVerse to separate the skills into separate columns for each respondent, create a dataframe for each skill, then export the dataframe as a csv to load to a MySql database.
+```{r}
+head(data2,1)
+```
+
+#### create the language skills dataframe and csv
+```{r message=FALSE, warning=FALSE}
+languages <- select(data2, Respondent, LanguageWorkedWith)
+
+LanguageSkills <- languages %>%
+separate(LanguageWorkedWith, c("Language1", "Language2","Language3", "Language4","Language5", "Language6","Language7", "Language8","Language9", "Language10","Language11", "Language12","Language13", "Language14","Language15", "Language16","Language17", "Language18","Language19", "Language20","Language21", "Language22","Language23", "Language24","Language25"), ";")
+
+write.csv(LanguageSkills, 'LanguageSkills.csv', row.names = FALSE)
+```
+
+#### create the database skills dataframe and csv
+```{r}
+databases <- select(data2, Respondent, DatabaseWorkedWith)
+
+DatabaseSkills <- databases %>%
+separate(DatabaseWorkedWith, c("Database1", "Database2","Database3", "Database4","Database5", "Database6","Database7", "Database8","Database9", "Database10","Database11", "Database12","Database13"), ";")
+    
+write.csv(DatabaseSkills, 'DatabaseSkills.csv', row.names = FALSE)
+```
+
+#### create the platform skills dataframe and csv
+```{r}
+platforms <- select(data2, Respondent, PlatformWorkedWith)
+
+PlatformSkills <- platforms %>%
+separate(PlatformWorkedWith, c("Platform1", "Platform2","Platform3", "Platform4","Platform5", "Platform6","Platform7", "Platform8","Platform9", "Platform10","Platform11", "Platform12","Platform13", "Platform14","Platform15", "Platform16"), ";")
+
+write.csv(PlatformSkills, 'PlatformSkills.csv', row.names = FALSE)
+```
+
+#### create the webframe skills dataframe and csv
+```{r}
+webframes <- select(data2, Respondent, WebFrameWorkedWith)
+
+WebFrameSkills <- webframes %>%
+separate(WebFrameWorkedWith, c("WebFrame1", "WebFrame2","WebFrame3", "WebFrame4","WebFrame5", "WebFrame6","WebFrame7", "WebFrame8","WebFrame9", "WebFrame10","WebFrame11", "WebFrame12"), ";")
+
+write.csv(WebFrameSkills, 'WebFrameSkills.csv', row.names = FALSE)
+```
+
+#### create the devenviron skills dataframe and csv
+```{r}
+devenvirons <- select(data2, Respondent, DevEnviron)
+
+DevEnvironSkills <- devenvirons %>%
+separate(DevEnviron, c("DevEnviron1", "DevEnviron2","DevEnviron3", "DevEnviron4","DevEnviron5", "DevEnviron6","DevEnviron7", "DevEnviron8","DevEnviron9", "DevEnviron10","DevEnviron11", "DevEnviron12","DevEnviron13", "DevEnviron14","DevEnviron15", "DevEnviron16","DevEnviron17", "DevEnviron18","DevEnviron19", "DevEnviron20","DevEnviron21", "DevEnviron22"), ";")
+    
+write.csv(DevEnvironSkills, 'DevEnvironSkills.csv', row.names = FALSE)
+```
+
+#### create the opsys skills dataframe and csv
+```{r}
+opsys <- select(data2, Respondent, OpSys)
+
+write.csv(opsys, 'OpSysSkills.csv', row.names = FALSE)
+```
+
+#### Create the demographics dataframe and csv
+```{r}
+demographics <- select(data2, Respondent, Age, Gender, Ethnicity, Country, UndergradMajor, JobSat)
+
+write.csv(demographics, 'Demographics.csv', row.names = FALSE)
+```

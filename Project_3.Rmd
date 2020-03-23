@@ -143,7 +143,15 @@ plot_high_jobsat
 ## Languages
 
 ```{r import-os-csv}
-survey_lang_raw <- read.csv("https://raw.githubusercontent.com/hillt5/Project-3-DATA-607/master/LanguageSkills.csv")
+dbClearResult(dbListResults(db)[[1]])
+rs_lang = dbSendQuery(db, "select * from languageskills;")
+survey_lang_raw <- fetch(rs_lang, n=-1)
+
+#survey_lang_raw <-read.csv("https://raw.githubusercontent.com/hillt5/Project-3-DATA-607/master/LanguageSkills.csv")
+head(survey_lang_raw)
+names(survey_lang_raw)
+
+names(survey_lang_raw)<- c("Respondent", "Language1", "Language2", "Language3", "Language4", "Language5", "Language6", "Language7", "Language8", "Language9", "Language10", "Language11", "Language12", "Language13", "Language14", "Language15", "Language16", "Language17", "Language18", "Language19", "Language20", "Language21", "Language22", "Language23", "Language24", "Language25")
 
 head(survey_lang_raw)
 names(survey_lang_raw)
@@ -289,10 +297,19 @@ So while PowerShell is developers' favorite first pick, it's actually only the f
 ## Databases
 
 ```{r import-db-csv}
-survey_db_raw <- read.csv("https://raw.githubusercontent.com/hillt5/Project-3-DATA-607/master/DatabaseSkills.csv")
+dbClearResult(dbListResults(db)[[1]])
+rs_db = dbSendQuery(db, "select * from databaseskills;")
+survey_db_raw <- fetch(rs_db, n=-1)
+
+#survey_db_raw <- read.csv("https://raw.githubusercontent.com/hillt5/Project-3-DATA-607/master/DatabaseSkills.csv")
+head(survey_db_raw)
+names(survey_db_raw)
+
+names(survey_db_raw)<- c("Respondent", "Database1", "Database2", "Database3", "Database4", "Database5", "Database6", "Database7", "Database8", "Database9", "Database10", "Database11", "Database12", "Database13")
 
 head(survey_db_raw)
 names(survey_db_raw)
+
 ```
 Databases preference contains another 13 columns, I will check the same assumption about superfluous columns.
 
@@ -434,8 +451,17 @@ The number one preferred database for developers is Microsoft SQL Server, althou
 ## Platforms
 
 ```{r import-pf-csv}
+dbClearResult(dbListResults(db)[[1]])
+rs_pf = dbSendQuery(db, "select * from platformskills;")
+survey_pf_raw <- fetch(rs_pf, n=-1)
 
-survey_pf_raw <- read.csv("https://raw.githubusercontent.com/hillt5/Project-3-DATA-607/master/PlatformSkills.csv")
+#survey_pf_raw <- read.csv("https://raw.githubusercontent.com/hillt5/Project-3-DATA-607/master/PlatformSkills.csv")
+
+head(survey_pf_raw)
+names(survey_pf_raw)
+
+names(survey_pf_raw)<- c("Respondent", "Platform1", "Platform2", "Platform3", "Platform4", "Platform5", "Platform6", "Platform7", "Platform8", "Platform9", "Platform10", "Platform11", "Platform12", "Platform13", "Platform14", "Platform15", "Platform16")
+
 head(survey_pf_raw)
 names(survey_pf_raw)
 
@@ -582,7 +608,18 @@ Looking at the Platform reponses, it's a robust finding that Windows and Linux a
 ## Operating Systems
 
 ```{r}
-survey_os_raw <- read.csv("https://raw.githubusercontent.com/hillt5/Project-3-DATA-607/master/OpSysSkills.csv")
+dbClearResult(dbListResults(db)[[1]])
+rs_os = dbSendQuery(db, "select * from opsysskills;")
+survey_os_raw <- fetch(rs_os, n=-1)
+
+#survey_os_raw <- read.csv("https://raw.githubusercontent.com/hillt5/Project-3-DATA-607/master/OpSysSkills.csv")
+
+
+head(survey_os_raw)
+names(survey_os_raw)
+sum(is.na(survey_os_raw$opsys2 == FALSE))
+survey_os_raw <- subset(survey_os_raw, select = c("respondent_id", "opsys1"))
+names(survey_os_raw)<- c("Respondent", "OpSys")
 
 head(survey_os_raw)
 names(survey_os_raw)
@@ -675,10 +712,19 @@ plot_os_intl
 ## WebFrames
 
 ```{r}
-survey_wf_raw <- read.csv("https://raw.githubusercontent.com/hillt5/Project-3-DATA-607/master/WebFrameSkills.csv")
+dbClearResult(dbListResults(db)[[1]])
+rs_wf = dbSendQuery(db, "select * from webframeskills;")
+survey_wf_raw <- fetch(rs_wf, n=-1)
+
+#survey_wf_raw <- read.csv("https://raw.githubusercontent.com/hillt5/Project-3-DATA-607/master/WebFrameSkills.csv")
 
 head(survey_wf_raw)
 names(survey_wf_raw)
+
+names(survey_wf_raw)<- c("Respondent", "WebFrame1", "WebFrame2", "WebFrame3", "WebFrame4", "WebFrame5", "WebFrame6", "WebFrame7", "WebFrame8", "WebFrame9", "WebFrame10", "WebFrame11", "WebFrame12")
+
+names(survey_wf_raw)
+head(survey_wf_raw)
 ```
 There seems to be 12 webframe values. We will see how many contain mostly null values.
 
@@ -739,7 +785,16 @@ Interestingly, Angular appears to be the most popular first, and jQuery picks up
 ## Development Environment SKills
 
 ```{r}
-survey_de_raw <- read.csv("https://raw.githubusercontent.com/hillt5/Project-3-DATA-607/master/DevEnvironSkills.csv")
+dbClearResult(dbListResults(db)[[1]])
+rs_de = dbSendQuery(db, "select * from devenvironskills;")
+survey_de_raw <- fetch(rs_de, n=-1)
+
+#survey_de_raw <- read.csv("https://raw.githubusercontent.com/hillt5/Project-3-DATA-607/master/DevEnvironSkills.csv")
+
+head(survey_de_raw)
+names(survey_de_raw)
+
+names(survey_de_raw)<- c("Respondent", "DevEnviron1", "DevEnviron2", "DevEnviron3", "DevEnviron4", "DevEnviron5", "DevEnviron6", "DevEnviron7", "DevEnviron8", "DevEnviron9", "DevEnviron10", "DevEnviron11", "DevEnviron12", "DevEnviron13", "DevEnviron14", "DevEnviron15", "DevEnviron16", "DevEnviron17", "DevEnviron18", "DevEnviron19", "DevEnviron20", "DevEnviron21", "DevEnviron22")
 
 head(survey_de_raw)
 names(survey_de_raw)
